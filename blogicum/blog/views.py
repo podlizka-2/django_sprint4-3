@@ -253,7 +253,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         username = self.request.user
-        return reverse_lazy("blog:profile", kwargs={"username": username})
+        return reverse("blog:profile", kwargs={"username": username})
 
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
