@@ -54,7 +54,7 @@ class CategoryPostListView(MainPostListView):
         self.category = get_object_or_404(
             Category, slug=slug, is_published=True
         )
-        return super().get_queryset().filter(category=self.category)
+        return super().get_queryset(category=self.category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -111,7 +111,7 @@ class PostDetailView(DetailView):
     post_data = None
 
     def get_queryset(self):
-        self.post_data = get_object_or_404(Post, pk=self.kwargs["pk"])
+        self.post_data = get_object_or_404(Post, pk=self.kwargs["pk_url_kwarg"])
         if self.post_data.author == self.request.user:
             return post_all_query().filter(pk=self.kwargs["pk"])
         return post_published_query().filter(pk=self.kwargs["pk"])
@@ -121,7 +121,7 @@ class PostDetailView(DetailView):
         if self.check_post_data():
             context["flag"] = True
             context["form"] = CommentEditForm()
-        context["comments"] = self.object.comments.all().select_related(
+        context["comments"] = self.object.comments.select_related(
             "author"
         )
         return context
@@ -214,7 +214,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
 
     def dispatch(self, request, *args, **kwargs):
         if self.get_object().author != request.user:
-            return redirect("blog:post_detail", pk=self.kwargs["pk"])
+            return redirect("blog:post_detail", pk=self.kwargs["pk_url_kwarg"])
         return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
