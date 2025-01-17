@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
@@ -113,7 +112,10 @@ class PostDetailView(DetailView):
     post_data = None
 
     def get_queryset(self):
-        self.post_data = get_object_or_404(Post, pk=self.kwargs["pk_url_kwarg"])
+        self.post_data = get_object_or_404(
+            Post,
+            pk=self.kwargs["pk_url_kwarg"]
+            )
         if self.post_data.author == self.request.user:
             return post_all_query().filter(pk=self.kwargs["pk"])
         return post_published_query().filter(pk=self.kwargs["pk"])
@@ -193,7 +195,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         username = self.request.user
         return reverse("blog:profile", kwargs={"username": username})
-
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):

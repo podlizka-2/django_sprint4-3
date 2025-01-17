@@ -19,7 +19,10 @@ class PostEditForm(forms.ModelForm):
         exclude = ("author", "created_at")
         widgets = {
             "text": forms.Textarea({"rows": "5"}),
-            "pub_date": forms.DateTimeInput(format=("%Y-%m-%dT%H:%M"), attrs={"type": "datetime-local"}),
+            "pub_date": forms.DateTimeInput(
+                format=("%Y-%m-%dT%H:%M"),
+                attrs={"type": "datetime-local"}
+                ),
         }
 
 
