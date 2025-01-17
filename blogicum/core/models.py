@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class PublishedModel(models.Model):
     """Базовая модель.
 

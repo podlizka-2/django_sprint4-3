@@ -1,7 +1,8 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.utils.timezone import now
 from django.views.generic import (
     ListView,
@@ -13,6 +14,7 @@ from django.views.generic import (
 
 from core.utils import post_all_query, post_published_query, get_post_data
 from core.mixins import CommentMixinView
+from .constants import PAGINATE_BY
 from .models import Post, User, Category, Comment
 from .forms import UserEditForm, PostEditForm, CommentEditForm
 
@@ -30,7 +32,7 @@ class MainPostListView(ListView):
     model = Post
     template_name = "blog/index.html"
     queryset = post_published_query()
-    paginate_by = 10
+    paginate_by = PAGINATE_BY
 
 
 class CategoryPostListView(MainPostListView):
@@ -191,6 +193,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         username = self.request.user
         return reverse("blog:profile", kwargs={"username": username})
+
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):

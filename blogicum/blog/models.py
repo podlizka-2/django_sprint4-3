@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth import get_user_model
+from .constants import MAX_LENGHT
 
-from core.models import BaseModel, BaseTitle
+from core.models import PublishedModel, BaseTitle
 
 User = get_user_model()
 
 
-class Location(BaseModel):
+class Location(PublishedModel):
     """Местоположение.
 
     Атрибуты:
@@ -14,7 +15,7 @@ class Location(BaseModel):
     """
 
     name = models.CharField(
-        max_length=256,
+        max_length=MAX_LENGHT,
         verbose_name="Название места",
     )
 
@@ -27,7 +28,7 @@ class Location(BaseModel):
         return self.name
 
 
-class Category(BaseModel, BaseTitle):
+class Category(PublishedModel, BaseTitle):
     """Категория.
 
     Атрибуты:
@@ -56,7 +57,7 @@ class Category(BaseModel, BaseTitle):
         return self.title
 
 
-class Post(BaseModel, BaseTitle):
+class Post(PublishedModel, BaseTitle):
     """Публикация.
 
     Атрибуты:
