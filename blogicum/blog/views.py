@@ -114,7 +114,7 @@ class PostDetailView(DetailView):
     def get_queryset(self):
         self.post_data = get_object_or_404(
             Post,
-            pk=self.kwargs["pk_url_kwarg"]
+            pk=self.kwargs["pk"]
         )
         if self.post_data.author == self.request.user:
             return post_all_query().filter(pk=self.kwargs["pk"])
