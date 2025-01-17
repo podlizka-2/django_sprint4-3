@@ -21,8 +21,7 @@ class PostEditForm(forms.ModelForm):
             "text": forms.Textarea({"rows": "5"}),
             "pub_date": forms.DateTimeInput(
                 format=("%Y-%m-%dT%H:%M"),
-                attrs={"type": "datetime-local"}
-                ),
+                attrs={"type": "datetime-local"}),
         }
 
 
