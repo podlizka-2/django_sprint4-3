@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from .constants import MAX_LENGHT
 
+
 from core.models import PublishedModel, BaseTitle
 
 User = get_user_model()
