@@ -220,7 +220,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         if self.get_object().author != request.user:
             return redirect(
                 "blog:post_detail",
-                pk_url_kwarg=self.kwargs["pkpk_url_kwarg"]
+                pk_url_kwarg=self.kwargs["pk_url_kwarg"]
             )
         return super().dispatch(request, *args, **kwargs)
 
