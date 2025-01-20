@@ -161,7 +161,7 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
     form_class = UserEditForm
     template_name = "blog/user.html"
 
-    def get_object(self, queryset=None):
+    def get_object(self):
         return self.request.user
 
     def get_success_url(self):
@@ -220,7 +220,7 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
         if self.get_object().author != request.user:
             return redirect(
                 "blog:post_detail",
-                pk=self.kwargs["pk_url_kwarg"]
+                pk=self.kwargs["pk"]
             )
         return super().dispatch(request, *args, **kwargs)
 
