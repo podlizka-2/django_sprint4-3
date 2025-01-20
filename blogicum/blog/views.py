@@ -165,8 +165,8 @@ class UserProfileUpdateView(LoginRequiredMixin, UpdateView):
         return self.request.user
 
     def get_success_url(self):
-        username = self.request.user
-        return reverse("blog:profile", kwargs={"username": username})
+        user = self.request.user
+        return reverse("blog:profile", kwargs={"user": user})
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
@@ -193,8 +193,8 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        username = self.request.user
-        return reverse("blog:profile", kwargs={"username": username})
+        user = self.request.user
+        return reverse("blog:profile", kwargs={"user": user})
 
 
 class PostUpdateView(LoginRequiredMixin, UpdateView):
