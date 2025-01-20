@@ -29,7 +29,10 @@ class CommentMixinView(LoginRequiredMixin, View):
 
     def dispatch(self, request, *args, **kwargs):
         if self.get_object().author != request.user:
-            return redirect("blog:post_detail", pk=self.kwargs["pk"])
+            return redirect(
+                "blog:post_detail",
+                pk_url_kwarg=self.kwargs["pk_url_kwarg"]
+            )
         get_post_data(self.kwargs)
         return super().dispatch(request, *args, **kwargs)
 
