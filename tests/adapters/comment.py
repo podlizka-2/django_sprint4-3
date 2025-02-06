@@ -67,7 +67,6 @@ def CommentModelAdapter(CommentModel: type) -> CommentModelAdapterT:
                 return self.text[
                        :COMMENT_TEXT_DISPLAY_LEN_FOR_TESTS].split('\n')[0]
 
-    # checking expected fields exist
     _comment_model_cls_adapter = _CommentModelAdapter(CommentModel)
     fields = {'text', 'post', 'author', 'created_at'}
     for field in fields:

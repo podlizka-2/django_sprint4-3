@@ -292,7 +292,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
+        form.instance.user = self.request.user
         form.instance.post = self.post_data
         if self.post_data.author != self.request.user:
             self.send_author_email()

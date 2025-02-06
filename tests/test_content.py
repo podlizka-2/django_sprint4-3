@@ -16,9 +16,7 @@ from conftest import (
     N_PER_PAGE, UrlRepr, _testget_context_item_by_class,
     _testget_context_item_by_key)
 
-pytestmark = [
-    pytest.mark.django_db
-]
+pytestmark = [pytest.mark.django_db]
 
 
 class ContentTester:
@@ -274,6 +272,7 @@ class CategoryPostContentTester(PostContentTester):
     def page_url(self):
         if not self._page_url:
             from blog.models import Category
+
             category = Category.objects.first()
             if category:
                 self._page_url = UrlRepr(
