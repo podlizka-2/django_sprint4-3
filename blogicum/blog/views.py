@@ -189,7 +189,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = "blog/create.html"
 
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.author = self.request.user
         return super().form_valid(form)
 
     def get_success_url(self):

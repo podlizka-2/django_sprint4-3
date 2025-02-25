@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import (
     Iterable, Type, Optional, Union, Any, Tuple, List, NamedTuple, TypeVar)
 
+
 import pytest
 from django.apps import apps
 from django.contrib.auth import get_user_model
